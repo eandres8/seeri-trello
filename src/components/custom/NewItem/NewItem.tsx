@@ -40,7 +40,7 @@ export const NewItem: React.FC<Props> = ({ text, placeholder }) => {
             </div>
           </div>
         )
-        : (<span onClick={() => setShowInput(true)}>{text}</span>)
+        : (<span className={styles.text} onClick={() => setShowInput(true)}>{text}</span>)
       }
     </div>
   );

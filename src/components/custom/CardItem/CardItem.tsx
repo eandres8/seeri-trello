@@ -8,7 +8,7 @@ interface Props {
 
 export const CardItem: React.FC<Props> = ({ description, createdAt }) => {
   return (
-    <Card className={styles.card}>
+    <Card className={styles['card-item']}>
       <div className={styles['card-description']}>
         {description}
       </div>

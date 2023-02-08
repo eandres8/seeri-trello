@@ -6,7 +6,7 @@ type Props = {
 
 export const Card: React.FC<Props> = ({ children, className, ...rest }) => {
   return (
-    <div className={['card', styles.card, className].join(' ')} {...rest}>
+    <div className={['card-component', styles.card, className].join(' ')} {...rest}>
       {children}
     </div>
   );

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import styles from '@/styles/Home.module.scss';
-import { Header, ListItems, NewItem, NewItemList } from '@/components/custom';
+import { Header, ListItems, NewItemList } from '@/components/custom';
 
 export default function Home() {
   return (
