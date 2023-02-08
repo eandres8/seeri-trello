@@ -1,0 +1,65 @@
+@import './vars.scss';
+
+* {
+  box-sizing: border-box;
+  font-family: 'roboto';
+  font-size: 16px;
+}
+
+body {
+  background-color: $color-dark;
+  color: white;
+}
+
+.link {
+  color: $color-secondary;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.separator {
+  height: 4px;
+  width: 100%;
+}
