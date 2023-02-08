@@ -1,0 +1,16 @@
+.card {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 4px;
+}
+
+.card-description {
+  padding: 4px;
+  margin-bottom: 8px;
+}
+
+.created-at {
+  display: flex;
+  font-size: 12px;
+  justify-content: flex-end;
+  padding: 4px;
+}

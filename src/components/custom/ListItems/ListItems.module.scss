@@ -1,0 +1,23 @@
+@import '../../../styles/vars.scss';
+
+.list-items {
+  width: 300px;
+  padding: 16px 8px;
+}
+
+.header {
+  padding-bottom: 8px;
+  border-bottom: 1px solid $color-shadow;
+  margin-bottom: 8px;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.content {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
