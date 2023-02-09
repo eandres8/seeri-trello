@@ -29,5 +29,5 @@ export type ItemsFacade = {
   createGroup: (name: string) => Promise<ListGroup | null>;
   loadGroupList: () => Promise<void>;
   clearGroups: () => void;
-  createItem: (description: string, groupId: string) => Promise<Item>;
+  createItem: (description: string, groupId: string) => Promise<Item | null>;
 };
