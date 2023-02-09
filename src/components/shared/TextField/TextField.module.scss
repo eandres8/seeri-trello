@@ -1,3 +1,13 @@
+.text-field-content {
+  width: inherit;
+}
+
+.label {
+  width: inherit;
+  display: block;
+  margin-bottom: 4px;
+}
+
 .text-field {
   padding: 5px 12px;
   font-size: 16px;
@@ -10,4 +20,11 @@
   border-radius: 6px;
   box-shadow: 0 0 transparent;
   background: rgba(0, 0, 0, 0.2);
+}
+
+.message-error {
+  margin: 4px;
+  font-size: 12px;
+  color: red;
+  width: 100%;
 }
