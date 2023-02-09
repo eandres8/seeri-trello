@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 import { useItemContext } from '@/application/context/ItemsContext';
 
 export const Header: React.FC = () => {
