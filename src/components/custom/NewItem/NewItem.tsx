@@ -6,12 +6,10 @@ import { TextField, Button } from '@/components/shared';
 interface Props {
   placeholder: string;
   text: string;
-  buttonConfirmHandle: () => void;
+  handleConfirm: (value: string) => void;
 }
 
-export const NewItem: React.FC<Props> = ({ text, placeholder }) => {
-  // TODO: transparent on empty
-  
+export const NewItem: React.FC<Props> = ({ text, placeholder, handleConfirm }) => {
   const [showInput, setShowInput] = useState(false);
   const [textList, setTextList] = useState('');
 
@@ -25,6 +23,8 @@ export const NewItem: React.FC<Props> = ({ text, placeholder }) => {
     setTextList(value);
   }
 
+  const submitText = () => handleConfirm(textList);
+
   return (
     <div className={styles['new-item']}>
       {
@@ -35,7 +35,7 @@ export const NewItem: React.FC<Props> = ({ text, placeholder }) => {
               <TextField className='w-100' value={textList} onChange={handleChange} placeholder={placeholder} />
             </div>
             <div className={styles.actions}>
-              <Button text='Crear' />
+              <Button text='Crear' onClick={submitText} />
               <Button color='secondary-outlet' text='Cancelar' onClick={handleCancel} />
             </div>
           </div>

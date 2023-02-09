@@ -14,13 +14,13 @@ export const ListItems: React.FC<Props> = ({ title }) => {
       </header>
       <section className={styles.content}>
         <CardItem description='Wooba looba dub dub' createdAt={Date.now()} />
-        <CardItem description='Wooba looba dub dub' createdAt={Date.now()} />
+        <CardItem description='Wooba looba dub dubs' createdAt={Date.now()} />
       </section>
       <footer>
         <NewItem
           placeholder="Escriba su tarjeta"
           text="+ Agregar tarjeta"
-          buttonConfirmHandle={() => {}}
+          handleConfirm={() => {}}
         />
       </footer>
     </Card>

@@ -14,10 +14,11 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Header />
-        <section className={styles.content}>
-          <ListItems title='TODO' />
-          <ListItems title='TODO' />
-          <NewItemList />
+        <section className={styles.container}>
+          <div className={styles.content}>
+            <ListItems title='TODO' />
+            <NewItemList />
+          </div>
         </section>
       </main>
     </>
