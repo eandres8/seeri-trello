@@ -11,6 +11,11 @@ export const useAuthFacade = (ui: UIFacade) => {
       ui.startLoading();
       const result = await AuthFirebase.register(username, password);
       dispatch({ type: '[AUTH] INIT_AUTHENTICATED', payload: result });
+
+      window.localStorage.setItem('token', result.token);
+      window.localStorage.setItem('uid', result.uid);
+      window.localStorage.setItem('email', result.email);
+
       success = true;
     } catch (error) {
       // TODO: create error message toast
@@ -40,6 +45,7 @@ export const useAuthFacade = (ui: UIFacade) => {
   }
 
   const doSignOut = () => {
+    window.localStorage.clear();
     dispatch({ type: '[AUTH] LOGOUT' })
   }
 
