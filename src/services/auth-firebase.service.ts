@@ -10,25 +10,27 @@ export class AuthFirebase {
     return signInWithEmailAndPassword(authFire, username, password).then(
       (userCredentials) => {
         const user = userCredentials.user;
-        console.log(user);
 
-        return user;
+        return {
+          uid: user.uid,
+          email: user.email ?? username,
+          token: (user as any).accessToken,
+        };
       }
-    ).catch(error => {
-        console.warn(error);
-    });
+    );
   }
   
   static async register(username: string, password: string) {
     return createUserWithEmailAndPassword(authFire, username, password).then(
       (userCredentials) => {
         const user = userCredentials.user;
-        console.log(user);
 
-        return user;
+        return {
+          uid: user.uid,
+          email: user.email ?? username,
+          token: (user as any).accessToken,
+        };
       }
-    ).catch(error => {
-        console.warn(error);
-    });
+    );
   }
 }

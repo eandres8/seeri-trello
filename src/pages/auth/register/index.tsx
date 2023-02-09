@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 
 import styles from "./register.module.scss";
 import { TextField, Button, Card } from "@/components/shared";
+import { useItemContext } from "@/application/context/ItemsContext";
 
 const RegisterPage: FC = () => {
+  const { doRegister } = useItemContext();
   const {
     register,
     formState: { errors },
@@ -17,8 +19,8 @@ const RegisterPage: FC = () => {
     clearErrors
   } = useForm();
 
-  const onSubmit = (values: any) => {
-    console.log({ values });
+  const onSubmit = ({ username, password }: any) => {
+    doRegister(username, password);
   };
 
   const handleConfirmPass = (event: ChangeEvent<HTMLInputElement>) => {

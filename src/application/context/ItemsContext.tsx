@@ -1,14 +1,26 @@
 import { createContext, FC, useContext } from "react";
 
-const ItemsContext = createContext({});
+import { useUIFacade } from '../facades/useUIFacade';
+import { ItemsState } from './context.types';
+import { useAuthFacade } from '../facades/useAuthFacade';
+
+const ItemsContext = createContext({} as ItemsState);
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const ItemsContextProvider: FC<Props> = ({ children }) => {
+  const uiContext = useUIFacade();
+  const authContext = useAuthFacade(uiContext);
+
+  const context = {
+    ...uiContext,
+    ...authContext,
+  };
+
   return (
-    <ItemsContext.Provider value={{}}>
+    <ItemsContext.Provider value={context}>
       {children}
     </ItemsContext.Provider>
   );

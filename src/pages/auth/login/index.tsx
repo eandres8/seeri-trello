@@ -1,25 +1,49 @@
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 
 import styles from './login.module.scss';
 import { TextField, Button, Card } from '@/components/shared';
+import { useItemContext } from '@/application/context/ItemsContext';
 
 const LoginPage: React.FC = () => {
+  const { doSignIn } = useItemContext();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = ({ username, password }: any) => {
+    doSignIn(username, password);
+  };
+  
   return (
     <div className={[styles.login, 'flex-column-center'].join(' ')}>
 
       <h1 className={styles.title}>Ingresa a Seeri Trello</h1>
       
       <Card className={[styles.card, 'flex-column-center'].join(' ')}>
-        <label htmlFor="user" className='w-100'>Usuario</label>
-        <TextField name='user' id='user' className='w-100' />
-        <label htmlFor="pass" className='w-100'>Contraseña</label>
-        <TextField name='pass' type='password' id='pass' className='w-100' />
-
-        <div className='separator'></div>
-        <Button text='Ingresar' className='w-100' />
-        <Link href="/auth/register" legacyBehavior>
-          <a className='link'>Crear usuario</a>
-        </Link>
+        <form onSubmit={handleSubmit(onSubmit)} className={[styles.form, "flex-column-center"].join(" ")}>
+          <TextField
+            label='Usuario'
+            className="w-100"
+            type="email"
+            {...register("username", { required: true })}
+            error={errors["username"] ? 'El campo es obligatorio' : ''}
+          />
+          <TextField
+            label='Contraseña'
+            type="password"
+            className="w-100"
+            {...register("password", { required: true })}
+            error={errors["password"] ? 'El campo es obligatorio' : ''}
+          />
+          <div className='separator'></div>
+          <Button text='Ingresar' className='w-100' />
+          <Link href="/auth/register" legacyBehavior>
+            <a className='link'>Crear usuario</a>
+          </Link>
+        </form>
       </Card>
       
     </div>
