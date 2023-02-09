@@ -12,7 +12,13 @@ export const itemsReducer = (
 ): ItemsState => {
   switch (action.type) {
     case "[ITEM] ADD_ITEM":
-      return { ...state };
+      return { ...state, listGroups: state.listGroups.map(group => {
+        if(group.id === action.payload.id) {
+          return action.payload;
+        }
+
+        return group;
+      } ) };
 
     case "[ITEM] ADD_GROUP":
       return {

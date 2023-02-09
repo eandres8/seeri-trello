@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { UIFacade } from '../types/ui.types';
 import { useItemsReducer } from '../reducers/itemsReducer';
 import { ItemsFirebase } from '@/services/items-firebase.service';
-import { ListGroup } from '@/application/types/items.types';
+import { Item, ListGroup } from '@/application/types/items.types';
 
 export const useItemsFacade = (ui: UIFacade, uid: string) => {
   const [state, dispatch] = useItemsReducer();
@@ -19,7 +21,6 @@ export const useItemsFacade = (ui: UIFacade, uid: string) => {
       ui.startLoading();
       const result = await ItemsFirebase.createGroup(newGroup);
       newGroup.id = result.id;
-      console.log('useItemsFacade.createGroup', { result });
     } catch (error) {
       console.log('useItemsFacade.createGroup', {error});
 
@@ -36,7 +37,6 @@ export const useItemsFacade = (ui: UIFacade, uid: string) => {
     try {
       ui.startLoading();
       const result = await ItemsFirebase.listGroup(uid);
-      console.log('useItemsFacade.loadGroupList', { result });
       dispatch({ type: '[ITEM] LOAD_GROUPS', payload: result })
     } catch (error) {
       console.log('useItemsFacade.loadGroupList', {error});
@@ -45,14 +45,47 @@ export const useItemsFacade = (ui: UIFacade, uid: string) => {
     }
   }
 
+  const createItem = async (description: string, groupId: string) => {
+    const group = state.listGroups.find(group => group.id === groupId);
+    const index = group?.itemList.length ?? 0;
+    const newItem: Item = {
+      index,
+      id: uuidv4(),
+      description,
+      createdAt: Date.now(),
+      status: groupId,
+    };
+
+    const newGroupItem: ListGroup = {
+      ...(group as ListGroup),
+      itemList: [...(group?.itemList ?? []), newItem]
+    };
+
+    try {
+      ui.startLoading();
+
+      await ItemsFirebase.createItem(newGroupItem);
+    } catch (error) {
+      console.log('useItemsFacade.createGroup', {error});
+
+      return null;
+    } finally {
+      ui.finishLoading();
+    }
+    dispatch({ type: '[ITEM] ADD_ITEM', payload: newGroupItem });
+
+    return newItem;
+  }
+
   const clearGroups = () => {
     dispatch({ type: '[ITEM] CLEAR_GROUPS' });
   }
 
-  return {
+  return {            
     itemsState: state,
     createGroup,
     loadGroupList,
     clearGroups,
+    createItem,
   }
 }
