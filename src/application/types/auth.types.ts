@@ -12,5 +12,6 @@ export type AuthActionType =
 export type AuthFacade = {
   doRegister: (username: string, password: string) => Promise<boolean>;
   doSignIn: (username: string, password: string) => Promise<boolean>;
+  doSignOut: () => void;
   authState: AuthState;
 }

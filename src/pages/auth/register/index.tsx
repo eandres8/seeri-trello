@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import { useForm } from "react-hook-form";
 
 import { ChangeEvent, FC, useEffect } from "react";
@@ -8,6 +9,7 @@ import { TextField, Button, Card } from "@/components/shared";
 import { useItemContext } from "@/application/context/ItemsContext";
 
 const RegisterPage: FC = () => {
+  const router = useRouter();
   const { doRegister } = useItemContext();
   const {
     register,
@@ -19,8 +21,12 @@ const RegisterPage: FC = () => {
     clearErrors
   } = useForm();
 
-  const onSubmit = ({ username, password }: any) => {
-    doRegister(username, password);
+  const onSubmit = async ({ username, password }: any) => {
+    const result = await doRegister(username, password);
+
+    if(result) {
+      router.replace('/');
+    }
   };
 
   const handleConfirmPass = (event: ChangeEvent<HTMLInputElement>) => {

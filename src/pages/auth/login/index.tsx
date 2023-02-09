@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
     const result = await doSignIn(username, password);
     
     if(result) {
-      router.push('/');
+      router.replace('/');
     }
   };
   

@@ -1,12 +1,22 @@
+import { useRouter } from 'next/router';
+
 import styles from './header.module.scss';
+import { useItemContext } from '@/application/context/ItemsContext';
 
-interface Props {}
+export const Header: React.FC = () => {
+  const router = useRouter();
+  const { doSignOut, clearGroups } = useItemContext();
 
-export const Header: React.FC<Props> = () => {
+  const singOut = () => {
+    doSignOut();
+    clearGroups();
+    router.replace('/auth/login');
+  }
+
   return (
     <header className={styles.header}>
         <span>Dashbard</span>
-        <span>cerrar sesión</span>
+        <span onClick={singOut}>cerrar sesión</span>
     </header>
   );
 }

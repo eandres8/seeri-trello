@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 
 import styles from '@/styles/Home.module.scss';
@@ -5,7 +6,11 @@ import { Header, ListItems, NewItemList } from '@/components/custom';
 import { useItemContext } from '../application/context/ItemsContext';
 
 export default function Home() {
-  const { itemsState: { listGroups } } = useItemContext();
+  const { itemsState: { listGroups }, loadGroupList } = useItemContext();
+
+  useEffect(() => {
+    loadGroupList();
+  }, []);
 
   return (
     <>

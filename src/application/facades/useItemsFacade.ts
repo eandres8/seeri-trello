@@ -33,12 +33,26 @@ export const useItemsFacade = (ui: UIFacade, uid: string) => {
   }
 
   const loadGroupList = async () => {
+    try {
+      ui.startLoading();
+      const result = await ItemsFirebase.listGroup(uid);
+      console.log('useItemsFacade.loadGroupList', { result });
+      dispatch({ type: '[ITEM] LOAD_GROUPS', payload: result })
+    } catch (error) {
+      console.log('useItemsFacade.loadGroupList', {error});
+    } finally {
+      ui.finishLoading();
+    }
+  }
 
+  const clearGroups = () => {
+    dispatch({ type: '[ITEM] CLEAR_GROUPS' });
   }
 
   return {
     itemsState: state,
     createGroup,
     loadGroupList,
+    clearGroups,
   }
 }

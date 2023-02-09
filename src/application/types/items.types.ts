@@ -22,9 +22,11 @@ export type ItemsActionType =
   | { type: "[ITEM] ADD_GROUP", payload: ListGroup }
   | { type: "[ITEM] LOAD_GROUPS", payload: ListGroup[] }
   | { type: "[ITEM] ADD_ITEM", payload: Item }
+  | { type: "[ITEM] CLEAR_GROUPS" }
 
 export type ItemsFacade = {
   itemsState: ItemsState;
   createGroup: (name: string) => Promise<ListGroup | null>;
   loadGroupList: () => Promise<void>;
+  clearGroups: () => void;
 };

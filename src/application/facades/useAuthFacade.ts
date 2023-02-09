@@ -39,9 +39,14 @@ export const useAuthFacade = (ui: UIFacade) => {
     return success;
   }
 
+  const doSignOut = () => {
+    dispatch({ type: '[AUTH] LOGOUT' })
+  }
+
   return {
     authState: state,
     doRegister,
     doSignIn,
+    doSignOut,
   }
 }

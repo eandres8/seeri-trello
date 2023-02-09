@@ -27,6 +27,9 @@ export const itemsReducer = (
         (a, b) => a.index - b.index
       ) };
 
+    case '[ITEM] CLEAR_GROUPS':
+      return { ...initialItemsState };
+
     default:
       return state;
   }
