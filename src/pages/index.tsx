@@ -2,8 +2,11 @@ import Head from 'next/head';
 
 import styles from '@/styles/Home.module.scss';
 import { Header, ListItems, NewItemList } from '@/components/custom';
+import { useItemContext } from '../application/context/ItemsContext';
 
 export default function Home() {
+  const { itemsState: { listGroups } } = useItemContext();
+
   return (
     <>
       <Head>
@@ -16,7 +19,11 @@ export default function Home() {
         <Header />
         <section className={styles.container}>
           <div className={styles.content}>
-            <ListItems title='TODO' />
+            {
+              listGroups.map(group => (
+                <ListItems key={group.id} group={group} />
+              ))
+            }
             <NewItemList />
           </div>
         </section>

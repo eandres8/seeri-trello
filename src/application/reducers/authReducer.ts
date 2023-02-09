@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 import { AuthState, AuthActionType } from '../types/auth.types';
 
-export const initialUIState: AuthState = {
+export const initialAuthState: AuthState = {
   isAuthenticated: false,
   email: '',
   uid: '',
@@ -15,7 +15,7 @@ export const authReducer = (state: AuthState, action: AuthActionType): AuthState
       return { ...state, ...action.payload, isAuthenticated: true };
 
     case '[AUTH] LOGOUT':
-      return { ...initialUIState };
+      return { ...initialAuthState };
   
     default:
       return state;
@@ -23,5 +23,5 @@ export const authReducer = (state: AuthState, action: AuthActionType): AuthState
 }
 
 export const useAuthReducer = () => {
-  return useReducer(authReducer, initialUIState);
+  return useReducer(authReducer, initialAuthState);
 }

@@ -1,28 +1,39 @@
-import styles from './ListItems.module.scss';
-import { Card } from '@/components/shared';
-import { CardItem, NewItem } from '@/components/custom';
+import styles from "./ListItems.module.scss";
+import { Card } from "@/components/shared";
+import { CardItem, NewItem } from "@/components/custom";
+import { ListGroup } from "@/application/types/items.types";
 
 interface Props {
-  title: string;
+  group: ListGroup;
 }
 
-export const ListItems: React.FC<Props> = ({ title }) => {
+export const ListItems: React.FC<Props> = ({ group }) => {
   return (
-    <Card className={styles['list-items']}>
+    <Card className={styles["list-items"]}>
       <header className={styles.header}>
-        <h4>{title}</h4>
+        <h4>{group.name}</h4>
       </header>
       <section className={styles.content}>
-        <CardItem description='Wooba looba dub dub' createdAt={Date.now()} />
-        <CardItem description='Wooba looba dub dubs' createdAt={Date.now()} />
+        {group.itemList.map((item) => (
+          <CardItem
+            key={item.id}
+            description={item.description}
+            createdAt={item.createdAt}
+          />
+        ))}
       </section>
       <footer>
         <NewItem
           placeholder="Escriba su tarjeta"
           text="+ Agregar tarjeta"
           handleConfirm={() => {}}
+          textValue={""}
+          setTextValue={() => {}}
+          handleCancel={() => {}}
+          showInput={false}
+          setShowInput={() => {}}
         />
       </footer>
     </Card>
   );
-}
+};

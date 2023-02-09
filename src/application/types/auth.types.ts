@@ -10,7 +10,7 @@ export type AuthActionType =
   | { type: "[AUTH] LOGOUT" };
 
 export type AuthFacade = {
-  doRegister: (username: string, password: string) => Promise<void>;
-  doSignIn: (username: string, password: string) => Promise<void>;
+  doRegister: (username: string, password: string) => Promise<boolean>;
+  doSignIn: (username: string, password: string) => Promise<boolean>;
   authState: AuthState;
 }

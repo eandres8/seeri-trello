@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
 import styles from './login.module.scss';
@@ -6,6 +7,7 @@ import { TextField, Button, Card } from '@/components/shared';
 import { useItemContext } from '@/application/context/ItemsContext';
 
 const LoginPage: React.FC = () => {
+  const router = useRouter();
   const { doSignIn } = useItemContext();
   const {
     register,
@@ -13,8 +15,12 @@ const LoginPage: React.FC = () => {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = ({ username, password }: any) => {
-    doSignIn(username, password);
+  const onSubmit = async ({ username, password }: any) => {
+    const result = await doSignIn(username, password);
+    
+    if(result) {
+      router.push('/');
+    }
   };
   
   return (
